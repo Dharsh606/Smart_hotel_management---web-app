@@ -81,12 +81,21 @@ A fully functional, production-ready Smart Hotel Management System built with Py
 *Visual display of all rooms with their current status and booking information*
 
 ### 5. Check-in/Check-out
-![Check-in](screenshots/checkin.png)
-*Streamlined check-in and check-out workflow*
+![Check-in](screenshots/check-in.png)
+*Streamlined check-in workflow*
 
-### 6. Activity Logs
+### 6. Check-out
+![Check-in](screenshots/check-out.png)
+*Streamlined check-out workflow*
+
+### 7. Logs
 ![Logs](screenshots/logs.png)
 *Comprehensive activity logging system for monitoring all system actions*
+
+### 8. Activity
+![Logs](screenshots/activity.png)
+*Comprehensive activity logging system for monitoring all system actions*
+
 
 ## 📦 Installation & Setup
 
@@ -273,4 +282,5 @@ For questions, suggestions, or collaboration opportunities, please feel free to 
 **Built with passion using Flask, SQLite, and Tailwind CSS**
 
 **Developed by**: Dharshan V
+
 
