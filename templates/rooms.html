@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rooms - Smart Hotel Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-indigo-600">🏨 Smart Hotel Management</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="{{ url_for('dashboard') }}" class="text-gray-700 hover:text-indigo-600">Dashboard</a>
+                    <a href="{{ url_for('book') }}" class="text-gray-700 hover:text-indigo-600">New Booking</a>
+                    <span class="text-gray-700">Welcome, <strong>{{ session.user }}</strong></span>
+                    <a href="{{ url_for('logout') }}" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="bg-white rounded-lg shadow-md p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">🛏️ All Rooms</h2>
+                <a href="{{ url_for('book') }}" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition font-semibold">
+                    ➕ New Booking
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {% for room in rooms %}
+                <div class="border-2 rounded-lg p-6 transition hover:shadow-lg 
+                    {% if room.status == 'Available' %}bg-green-50 border-green-300
+                    {% elif room.status == 'Booked' %}bg-yellow-50 border-yellow-300
+                    {% elif room.status == 'Occupied' %}bg-red-50 border-red-300
+                    {% else %}bg-gray-50 border-gray-300{% endif %}">
+                    
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold text-gray-800">Room {{ room.room_number }}</h3>
+                        <span class="px-3 py-1 text-xs font-semibold rounded-full 
+                            {% if room.status == 'Available' %}bg-green-200 text-green-800
+                            {% elif room.status == 'Booked' %}bg-yellow-200 text-yellow-800
+                            {% elif room.status == 'Occupied' %}bg-red-200 text-red-800
+                            {% else %}bg-gray-200 text-gray-800{% endif %}">
+                            {{ room.status }}
+                        </span>
+                    </div>
+                    
+                    {% if room.guest_name %}
+                        <div class="space-y-2">
+                            <div class="flex items-center text-sm">
+                                <span class="font-semibold text-gray-700 mr-2">Guest:</span>
+                                <span class="text-gray-800">{{ room.guest_name }}</span>
+                            </div>
+                            <div class="flex items-center text-sm">
+                                <span class="font-semibold text-gray-700 mr-2">Check-in:</span>
+                                <span class="text-gray-800">{{ room.check_in }}</span>
+                            </div>
+                            <div class="flex items-center text-sm">
+                                <span class="font-semibold text-gray-700 mr-2">Check-out:</span>
+                                <span class="text-gray-800">{{ room.check_out }}</span>
+                            </div>
+                            <div class="mt-3 pt-3 border-t border-gray-300">
+                                <span class="text-xs font-medium 
+                                    {% if room.booking_status == 'Booked' %}text-yellow-700 bg-yellow-100 px-2 py-1 rounded
+                                    {% elif room.booking_status == 'Checked In' %}text-red-700 bg-red-100 px-2 py-1 rounded{% endif %}">
+                                    Booking: {{ room.booking_status }}
+                                </span>
+                            </div>
+                        </div>
+                    {% else %}
+                        <p class="text-gray-500 text-sm">No active booking</p>
+                        <p class="text-gray-400 text-xs mt-2">Ready for booking</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+
+            {% if not rooms %}
+                <div class="text-center py-12">
+                    <p class="text-gray-500 text-lg">No rooms found</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
