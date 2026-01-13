@@ -266,11 +266,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For questions, suggestions, or collaboration opportunities, please feel free to reach out:
 
-- **Author**: Dharshan V
 - **Email**: [dharshan.vreddy2819@gmail.com](mailto:dharshan.vreddy2819@gmail.com)
 
 ---
 
-**Built with ❤️ using Flask, SQLite, and Tailwind CSS**
+**Built with passion using Flask, SQLite, and Tailwind CSS**
 
 **Developed by**: Dharshan V
+
